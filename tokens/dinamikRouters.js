@@ -2,6 +2,7 @@ import appCliente from '../routers/cliente.js';
 import appAutomovil from '../routers/automovil.js';
 import appAlquileres from '../routers/alquileres.js';
 import appReserva from '../routers/reserva.js';
+import appEmpleado from '../routers/empleado.js';
 
 export async function dynamicRouter(req, res, next) {
   const { tabla } = req.params;
@@ -15,6 +16,8 @@ export async function dynamicRouter(req, res, next) {
       return appAlquileres(req, res, next);
     case 'reserva':
       return appReserva(req, res, next);
+    case 'empleado':
+      return appEmpleado(req, res, next);
     default:
       return res.status(404).send({ error: tabla+'Ruta no encontrada' });
   }
