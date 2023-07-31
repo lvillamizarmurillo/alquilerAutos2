@@ -7,16 +7,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Expose } from 'class-transformer';
-import { IsDefined, IsNumber } from 'class-validator';
+import { Expose, Transform } from 'class-transformer';
 export class storageAlquileres {
-    constructor(ID_Alquiler) {
+    constructor(ID_Alquiler, DNI) {
         this.ID_Alquiler = ID_Alquiler;
+        this.DNI = DNI;
     }
 }
 __decorate([
     Expose({ name: 'ID-Alquiler' }),
-    IsDefined({ message: () => { throw { status: 422, message: "El parametro ID-Alquiler es obligatorio" }; } }),
-    IsNumber({}, { message: () => { throw { status: 406, message: "El formato del parametro ID-Alquiler debe ser un numero" }; } }),
+    Transform(({ value }) => { if (/^[0-9]|undefined+$/.test(value))
+        return (value);
+    else
+        throw { status: 422, message: "El formato del parametro ID-Alquiler debe ser un numero." }; }, { toClassOnly: true }),
     __metadata("design:type", Number)
 ], storageAlquileres.prototype, "ID_Alquiler", void 0);
+__decorate([
+    Expose({ name: 'DNI' }),
+    Transform(({ value }) => { if (/^[0-9]|undefined+$/.test(value))
+        return (value);
+    else
+        throw { status: 422, message: "El formato del parametro DNI debe ser un numero." }; }, { toClassOnly: true }),
+    __metadata("design:type", Number)
+], storageAlquileres.prototype, "DNI", void 0);
