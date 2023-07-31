@@ -29,5 +29,22 @@ appAlquileres.get("/",(req, res) => {
     });
 });
 
+appAlquileres.get("/id", appmiddlewareAlquileres, (req, res) => {
+    const {ID_Alquiler} = req.body;
+    con.query(
+        `SELECT * FROM Alquiler WHERE ID_Alquiler = ?`,
+        [ID_Alquiler],(err,data)=>{
+            if(err){
+                console.log(err);
+                res.status(500).send("Error en el servidor: "+err.sqlMessage);
+            }else if(data.length === 0){
+                res.status(500).send("Error: el dato no existe en la tabla buscada");
+            }else{
+                console.log(data);
+                res.status(200).send(data);
+            }
+    });
+});
+
 
 export default appAlquileres;
