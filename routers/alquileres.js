@@ -32,7 +32,7 @@ appAlquileres.get("/",(req, res) => {
 appAlquileres.get("/id", appmiddlewareAlquileres, (req, res) => {
     const {ID_Alquiler} = req.body;
     if(!ID_Alquiler){
-        return res.status(400).send("El parametro ID_Alquiler es obligatorio para buscar"); 
+        return res.status(400).send("El parametro ID-Alquiler es obligatorio para buscar"); 
     }
     con.query(
         `SELECT * FROM Alquiler WHERE ID_Alquiler = ?`,
